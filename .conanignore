@@ -1,1 +1,8 @@
+.gitignore
+Pipfile
+Pipfile.lock
 README.md
+render_profiles.py
+templates/*
+__pycache__/*
+fn_match.py
