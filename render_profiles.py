@@ -4,6 +4,16 @@ from jinja2 import Environment, FileSystemLoader
 from pathlib import Path
 from typing import Any
 
+
+"""
+This script will render the profiles for the different platforms and compilers
+that we support. It will also symlink the default profile to the one we want to
+use by default.
+
+The profiles are rendered from the templates in the jinja templates directory.
+So if you want to change the profiles, you should change the templates instead.
+"""
+
 file_dir = Path(__file__).parent
 
 # Path to templates
@@ -28,8 +38,10 @@ def render_template(template_name, **kwargs):
 
 def save_profile(profile, settings):
     os = settings["os"].lower()
-    architecture = settings["architecture"]["name"]
-    compiler = settings["compiler"]["name"] + "-" + settings["compiler"]["version"]
+    architecture = settings["architecture"]["name"].lower()
+    compiler = (
+        f"{settings['compiler']['name'].lower()}-{settings['compiler']['version']}"
+    )
     build_type = settings["build_type"].lower()
 
     file_name = f"{architecture}-{os}-{build_type}-{compiler}"
@@ -76,7 +88,7 @@ def main():
     }
     for architecture in architectures.values():
         for compiler in compilers:
-            # Skip aarch64 clang
+            # Skip aarch64 clang, for now
             if architecture["name"] == "aarch64" and compiler["name"] == "clang":
                 continue
             for build_type in build_types:
@@ -116,9 +128,10 @@ def main():
     if default_profile.exists():
         default_profile.unlink()
 
+    # The default profile is the x86_64-linux-release-gcc-9 profile
     default_profile.symlink_to(profile_dir / "x86_64-linux-release-gcc-9")
 
-    print("Done")
+    print("Done!")
 
 
 if __name__ == "__main__":
