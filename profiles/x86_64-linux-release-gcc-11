@@ -1,0 +1,17 @@
+[settings]
+os = Linux
+arch = x86_64
+compiler = gcc
+compiler.version = 11
+build_type = Release
+
+compiler.libcxx = libstdc++11
+
+[buildenv]
+
+[conf]
+tools.build:compiler_executables = {'c': '/usr/bin/x86_64-linux-gnu-gcc-11', 'cpp': '/usr/bin/x86_64-linux-gnu-g++-11'}
+
+
+tools.build:cxxflags += ['-g']
+tools.build:cflags += ['-g']
