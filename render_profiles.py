@@ -129,7 +129,7 @@ def main():
         default_profile.unlink()
 
     # The default profile is the x86_64-linux-release-gcc-9 profile
-    default_profile.symlink_to(profile_dir / "x86_64-linux-release-gcc-9")
+    default_profile.symlink_to("x86_64-linux-release-gcc-9")
 
     print("Done!")
 
