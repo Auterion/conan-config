@@ -1,0 +1,12 @@
+[settings]
+os = Macos
+arch = x86_64
+compiler = apple-clang
+compiler.version = 14
+build_type = Release
+
+compiler.libcxx = libc++
+
+[conf]
+tools.build:cxxflags += ['-g']
+tools.build:cflags += ['-g']

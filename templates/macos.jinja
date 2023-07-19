@@ -1,0 +1,14 @@
+[settings]
+os = {{ os }}
+arch = {{ architecture.conan_name }}
+compiler = {{ compiler.name }}
+compiler.version = {{ compiler.version }}
+build_type = {{ build_type }}
+
+compiler.libcxx = libc++
+
+[conf]
+{% if build_type == 'Release' %}
+tools.build:cxxflags += ['-g']
+tools.build:cflags += ['-g']
+{% endif %}

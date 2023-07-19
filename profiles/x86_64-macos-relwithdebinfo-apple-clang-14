@@ -1,0 +1,10 @@
+[settings]
+os = Macos
+arch = x86_64
+compiler = apple-clang
+compiler.version = 14
+build_type = RelWithDebInfo
+
+compiler.libcxx = libc++
+
+[conf]
