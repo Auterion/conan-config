@@ -122,6 +122,18 @@ def main():
 
         render_and_save_profile(settings)
 
+    # Create macos profiles
+    print("Creating macos profiles")
+    settings = {
+        "os": "Macos",
+        "architecture": architectures["x86_64"],
+        "compiler": {"name": "apple-clang", "version": "14"},
+    }
+    for build_type in build_types:
+        settings["build_type"] = build_type
+
+        render_and_save_profile(settings)
+
     # Set up the symlink for the default profile
     print("Setting up default profile")
     default_profile = profile_dir / "default"
