@@ -16,6 +16,7 @@ CONAN_CMAKE_FIND_ROOT_PATH_MODE_PROGRAM=Never
 CHOST=aarch64-linux-gnu
 AR=aarch64-linux-gnu-ar
 STRIP=aarch64-linux-gnu-strip
+PKG_CONFIG=/usr/bin/pkg-config
 
 [conf]
 tools.build:compiler_executables = {'c': '/usr/bin/aarch64-linux-gnu-gcc-11', 'cpp': '/usr/bin/aarch64-linux-gnu-g++-11'}
