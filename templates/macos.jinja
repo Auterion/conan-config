@@ -10,6 +10,9 @@ compiler.libcxx = libc++
 
 [conf]
 {% if build_type == 'Release' %}
-tools.build:cxxflags += ['-g']
-tools.build:cflags += ['-g']
+tools.build:cxxflags += ['-g -arch {{ architecture.apple_name }}']
+tools.build:cflags += ['-g -arch {{ architecture.apple_name }}']
+{% else %}
+tools.build:cxxflags += ['-arch {{ architecture.apple_name }}']
+tools.build:cflags += ['-arch {{ architecture.apple_name }}']
 {% endif %}

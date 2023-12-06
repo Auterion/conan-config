@@ -69,8 +69,8 @@ def main():
         file.unlink()
 
     architectures = {
-        "x86_64": {"name": "x86_64", "conan_name": "x86_64"},
-        "aarch64": {"name": "aarch64", "conan_name": "armv8"},
+        "x86_64": {"name": "x86_64", "conan_name": "x86_64", "apple_name": "x86_64"},
+        "aarch64": {"name": "aarch64", "conan_name": "armv8", "apple_name": "arm64"},
     }
 
     compilers = [
@@ -130,9 +130,11 @@ def main():
         "compiler": {"name": "apple-clang", "version": "14"},
     }
     for build_type in build_types:
-        settings["build_type"] = build_type
+        for architecture in architectures.values():
+            settings["build_type"] = build_type
+            settings["architecture"] = architecture
 
-        render_and_save_profile(settings)
+            render_and_save_profile(settings)
 
     # Set up the symlink for the default profile
     print("Setting up default profile")
