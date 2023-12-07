@@ -37,7 +37,7 @@ def render_template(template_name, **kwargs):
 
 
 def save_profile(profile, settings):
-    os = settings["os"].lower()
+    os = settings["os"]["name"].lower()
     architecture = settings["architecture"]["name"].lower()
     compiler = (
         f"{settings['compiler']['name'].lower()}-{settings['compiler']['version']}"
@@ -53,7 +53,7 @@ def save_profile(profile, settings):
 def render_and_save_profile(settings):
     profile = (
         render_template(
-            settings["os"].lower() + ".jinja",
+            settings["os"]["name"].lower() + ".jinja",
             **settings,
         ).rstrip()
         + "\n"
@@ -69,8 +69,8 @@ def main():
         file.unlink()
 
     architectures = {
-        "x86_64": {"name": "x86_64", "conan_name": "x86_64"},
-        "aarch64": {"name": "aarch64", "conan_name": "armv8"},
+        "x86_64": {"name": "x86_64", "conan_name": "x86_64", "apple_name": "x86_64"},
+        "aarch64": {"name": "aarch64", "conan_name": "armv8", "apple_name": "arm64"},
     }
 
     compilers = [
@@ -84,7 +84,7 @@ def main():
     # Create linux profiles
     print("Creating linux profiles")
     settings: dict[str, Any] = {
-        "os": "Linux",
+        "os": {"name": "Linux", },
     }
     for architecture in architectures.values():
         for compiler in compilers:
@@ -101,7 +101,7 @@ def main():
     # Create windows profiles
     print("Creating windows profiles")
     settings = {
-        "os": "Windows",
+        "os": {"name": "Windows", },
         "architecture": architectures["x86_64"],
         "compiler": {"name": "msvc", "version": "192", "runtime": "dynamic"},
     }
@@ -113,7 +113,7 @@ def main():
     # Create android profiles
     print("Creating android profiles")
     settings = {
-        "os": "Android",
+        "os": {"name": "Android", },
         "architecture": architectures["aarch64"],
         "compiler": {"name": "clang", "version": "14"},
     }
@@ -125,14 +125,16 @@ def main():
     # Create macos profiles
     print("Creating macos profiles")
     settings = {
-        "os": "Macos",
+        "os": {"name": "Macos", "version": "11"},
         "architecture": architectures["x86_64"],
         "compiler": {"name": "apple-clang", "version": "14"},
     }
     for build_type in build_types:
-        settings["build_type"] = build_type
+        for architecture in architectures.values():
+            settings["build_type"] = build_type
+            settings["architecture"] = architecture
 
-        render_and_save_profile(settings)
+            render_and_save_profile(settings)
 
     # Set up the symlink for the default profile
     print("Setting up default profile")

@@ -1,7 +1,7 @@
 [settings]
 os = Macos
 os.version = 11
-arch = x86_64
+arch = armv8
 compiler = apple-clang
 compiler.version = 14
 build_type = Debug
@@ -9,5 +9,5 @@ build_type = Debug
 compiler.libcxx = libc++
 
 [conf]
-tools.build:cxxflags += ['-arch x86_64']
-tools.build:cflags += ['-arch x86_64']
+tools.build:cxxflags += ['-arch arm64']
+tools.build:cflags += ['-arch arm64']
