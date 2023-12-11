@@ -125,7 +125,7 @@ def main():
     # Create macos profiles
     print("Creating macos profiles")
     settings = {
-        "os": {"name": "Macos", "version": "11"},
+        "os": {"name": "Macos", "version": "11.0"},
         "architecture": architectures["x86_64"],
         "compiler": {"name": "apple-clang", "version": "14"},
     }
