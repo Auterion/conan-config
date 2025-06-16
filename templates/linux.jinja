@@ -7,6 +7,9 @@ build_type = {{ build_type }}
 
 compiler.libcxx = libstdc++11
 
+[tool_requires]
+!cmake/*: cmake/[>=3 <4]
+
 [buildenv]
 {% if architecture.conan_name == 'armv8' %}
 CONAN_CMAKE_FIND_ROOT_PATH=/usr/aarch64-linux-gnu

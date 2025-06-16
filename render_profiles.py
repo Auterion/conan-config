@@ -74,6 +74,7 @@ def main():
     }
 
     compilers = [
+        {"name": "gcc", "version": "13"},
         {"name": "gcc", "version": "11"},
         {"name": "gcc", "version": "9"},
         {"name": "clang", "version": "14"},
@@ -142,8 +143,8 @@ def main():
     if default_profile.exists():
         default_profile.unlink()
 
-    # The default profile is the x86_64-linux-release-gcc-9 profile
-    default_profile.symlink_to("x86_64-linux-release-gcc-9")
+    # The default profile is the x86_64-linux-release-gcc-13 profile
+    default_profile.symlink_to("x86_64-linux-release-gcc-13")
 
     print("Done!")
 

@@ -7,6 +7,9 @@ build_type = Release
 
 compiler.libcxx = libstdc++11
 
+[tool_requires]
+!cmake/*: cmake/[>=3 <4]
+
 [buildenv]
 CONAN_CMAKE_FIND_ROOT_PATH=/usr/aarch64-linux-gnu
 CONAN_CMAKE_SYSTEM_NAME=Linux
